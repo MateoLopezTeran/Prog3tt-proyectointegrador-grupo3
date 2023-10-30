@@ -49,16 +49,15 @@ class Login extends Component {
           secureTextEntry={true}
           value={this.state.password}
         />
-        <TouchableOpacity
-          style={styles.button}
+        <TouchableOpacity style={styles.button}
           onPress={() => this.login(this.state.email, this.state.password)}
         >
           <Text style={styles.textButton}>Ingresar</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate("Registro")}
+        <TouchableOpacity style={styles.button}
+          onPress={() => this.props.navigation.navigate("Register")}
         >
-          <Text>No tengo cuenta. Registrarme.</Text>
+          <Text style={styles.textButton}>Crear cuenta</Text>
         </TouchableOpacity>
       </View>
     );
@@ -89,6 +88,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderStyle: "solid",
     borderColor: "#28a745",
+    margin: 5,
   },
   textButton: {
     color: "#fff",
