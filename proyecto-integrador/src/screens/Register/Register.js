@@ -21,11 +21,6 @@ class Register extends Component {
                 err: "No puedes registarte sin email"
             })
         }
-        else if (email < 6){
-            return this.setState({
-                err: "La contraseña debe tener mas de 6 caracteres"
-            })
-        }
         else if (pass === ""){
             return this.setState({
                 err: "No puedes registrarte sin contraseña"
