@@ -15,7 +15,7 @@ class Register extends Component {
         }
     }
 
-    register(email, pass){
+    register(email, pass, userName){
         if(email === ""){
             return this.setState({
                 err: "No puedes registarte sin email"
@@ -86,7 +86,7 @@ class Register extends Component {
                 keyboardType='default'
                 value={this.state.profilepic}
                 />
-                <TouchableOpacity style={styles.button} onPress={()=>this.register(this.state.email, this.state.password)}>
+                <TouchableOpacity style={styles.button} onPress={()=>this.register(this.state.email, this.state.password, this.state.userName)}>
                     <Text style={styles.textButton}>Registrarse</Text>    
                 </TouchableOpacity>
                 <TouchableOpacity onPress={ () => this.props.navigation.navigate('Login')}>
