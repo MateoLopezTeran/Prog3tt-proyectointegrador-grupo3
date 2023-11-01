@@ -35,6 +35,7 @@ class Register extends Component {
         auth.createUserWithEmailAndPassword(email, pass)
             .then( response => {
                 //Cuando firebase responde sin error
+                
                 console.log('Registrado ok', response);
 
                  //Cambiar los estados a vacío como están al inicio.
