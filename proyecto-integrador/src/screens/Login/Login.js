@@ -8,6 +8,7 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
+      error: '',
     };
   }
 
@@ -20,15 +21,25 @@ class Login extends Component {
   }
 
   login(email, contra) {
-    auth.signInWithEmailAndPassword(email, contra)
-        .then((response) => {
-            console.log("Login ok", response);
-            this.props.navigation.navigate("Menu");
+    if (email === '') {
+      return this.setState({
+        error: 'Es necesario rellenar el campo de email'
+      })
+    } else if (contra === '') {
+        return this.setState({
+          error: 'Es necesario rellenar el campo de password'
         })
-        .catch((error) => {
-            console.log(error);
-        });
     }
+
+    auth.signInWithEmailAndPassword(email, contra)
+      .then((response) => {
+        console.log("Login ok", response);
+        this.props.navigation.navigate("Menu");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   render() {
     return (
@@ -64,7 +75,7 @@ class Login extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = new StyleSheet.create({
   formContainer: {
     paddingHorizontal: 10,
     marginTop: 20,
@@ -80,7 +91,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   button: {
-    backgroundColor: "blue",
+    backgroundColor: "#15d41f",
     paddingHorizontal: 10,
     paddingVertical: 6,
     textAlign: "center",
