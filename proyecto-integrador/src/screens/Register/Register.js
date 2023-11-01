@@ -48,11 +48,79 @@ class Register extends Component {
     }
     render(){
         return (
-            <>
-              <Text>gsgsgs</Text>
-            </>
+            <View style={styles.formContainer}>
+                <Text>Register</Text>
+                <TextInput
+                style={styles.input}
+                onChangeText={(text)=>this.setState({email: text})}
+                placeholder='email'
+                keyboardType='email-address'
+                value={this.state.email}
+                />
+                <TextInput
+                style={styles.input}
+                onChangeText={(text)=>this.setState({password: text})}
+                placeholder='password'
+                keyboardType='default'
+                secureTextEntry={true}
+                value={this.state.password}
+                />
+                <TextInput
+                style={styles.input}
+                onChangeText={(text)=>this.setState({userName: text})}
+                placeholder='user name'
+                keyboardType='default'
+                value={this.state.userName}
+                />
+                <TextInput
+                style={styles.input}
+                onChangeText={(text)=>this.setState({bio: text})}
+                placeholder='bio'
+                keyboardType='default'
+                value={this.state.bio}
+                />
+                <TextInput
+                style={styles.input}
+                onChangeText={(text)=>this.setState({userName: profilepic})}
+                placeholder='profile pic'
+                keyboardType='default'
+                value={this.state.profilepic}
+                />
+
+            </View>
         )
     }
 }
+
+const styles = new StyleSheet.create({
+    formContainer: {
+        paddingHorizontal: 10,
+        marginTop: 20,
+      },
+      input: {
+        height: 20,
+        paddingVertical: 15,
+        paddingHorizontal: 10,
+        borderWidth: 1,
+        borderColor: "#ccc",
+        borderStyle: "solid",
+        borderRadius: 6,
+        marginVertical: 10,
+      },
+      button: {
+        backgroundColor: "blue",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "#28a745",
+        margin: 5,
+      },
+      textButton: {
+        color: "#fff",
+      },
+})
 
 export default Register;
