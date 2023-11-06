@@ -7,7 +7,12 @@ class Post extends Component {
     constructor(props){
         super(props)
         this.state={
-            like: false,
+            img: '',
+            description: '',
+            date: '',
+            email: '',
+            likes: '',
+            comments: '',
         }
     }
 
@@ -28,12 +33,37 @@ class Post extends Component {
         }
     }
 
+    crearPost(){
+        db.collection('posts').add({
+            owner: auth.currentUser.email,
+            description: this.state.description,
+            likes: [],
+            img: '',
+            createdAt: Date.now(),
+        })
+        .then()
+        .catch(err => console.log(e))
+    }
+
     likear(){
          //El post tendría que guardar una propiedad like con un array de los usuario que lo likearon.
     db.collection("posts").doc(this.props.infoPost.id).update({
         likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
     })
     .then(this.setState({like: true}))
+    }
+
+    render(){
+       return (
+        <View>
+            <Text>----------------------------------------------------</Text>
+                <Text>Datos del Post</Text>
+                <Text>Email: {this.props.infoPost.datos.owner}</Text>
+                <Text>Texto: {this.props.infoPost.datos.post}</Text>
+                <Text>Cantidad de Likes: {this.props.infoPost.datos.likes.length}</Text>
+            <TouchableOpacity></TouchableOpacity>
+        </View>
+       )
     }
 
 
