@@ -24,9 +24,9 @@ class Menu extends Component {
             <Tab.Screen name="Home" component={Home}/>
             <Tab.Screen name="Login" component={Login}/>
             <Tab.Screen name="Register" component={Register}/>
-            <Tab.Screen name="Search" component={Search}/>
+            {/* <Tab.Screen name="Search" component={Search}/>
             <Tab.Screen name="AddPost" component={AddPost}/>
-            <Tab.Screen name="Profile" component={Profile}/>
+            <Tab.Screen name="Profile" component={Profile}/> */}
         </Tab.Navigator>
     );
   }

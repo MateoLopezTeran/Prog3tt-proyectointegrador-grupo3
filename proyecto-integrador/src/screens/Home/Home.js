@@ -1,4 +1,4 @@
-/* import react, { Component } from "react";
+import react, { Component } from "react";
 import {
   TextInput,
   TouchableOpacity,
@@ -7,7 +7,7 @@ import {
   StyleSheet,
   FlatList 
 } from "react-native";
-import Post from "../../componentes/Post";
+import Post from '../../components/Post'
 
 import { auth, db } from "../../firebase/config";
 
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home; */
+export default Home;
