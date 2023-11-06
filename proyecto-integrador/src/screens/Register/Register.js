@@ -16,7 +16,7 @@ class Register extends Component {
     }
 
     register(email, pass, userName){
-        if(email === ""){
+        /* if(email === ""){
             return this.setState({
                 err: "No puedes registarte sin email"
             })
@@ -30,7 +30,7 @@ class Register extends Component {
             return this.setState({
                 err: "No puedes registrarte sin nombre de usuario"
             })
-        }
+        } */
 
         auth.createUserWithEmailAndPassword(email, pass)
             .then( response => {
