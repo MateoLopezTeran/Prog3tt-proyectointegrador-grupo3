@@ -1,4 +1,4 @@
-import { Component } from "react"
+import react, { Component } from "react"
 import { auth, db } from "../../firebase/config"
 import { TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList } from "react-native"
 import MyCamera from "../../components/MyCamera"
@@ -37,9 +37,7 @@ class PostForm extends Component {
             <View>
                 <Text>PostForm</Text>
 
-                {this.state.showCamera ?
-                <MyCamera onImageUpload={(url) => this.onImageUpload(url)}/>
-                :
+                {this.state.showCamera ? <MyCamera onImageUpload={(url) => this.onImageUpload(url)}/> :
                 <>
                 <TextInput style={styles.input} onChangeText={(text) => this.setState({post:text})} placeholder='Escribí un post' keyboardType="default" value={this.state.post}/>
                 <TouchableOpacity style={styles.button} onPress={() => this.postear()}>
