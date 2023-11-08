@@ -14,14 +14,14 @@ import { auth, db } from "../../firebase/config";
 
 
 class Home extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {listaPost: []};
   }
 
   componentDidMount(){
     //Traer datos
-    db.collection('posts').where("owner", "==", "julian@dh.com").onSnapshot(
+    db.collection('posts').where("owner", "==", "traer el mail de los usuarios").onSnapshot(
         posteos => {
             let postsAMostrar = [];
 

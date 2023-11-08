@@ -3,8 +3,8 @@ import { auth } from '../../firebase/config';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet} from 'react-native';
 
 class Register extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state={
             email: '',
             password: '',
@@ -13,6 +13,14 @@ class Register extends Component {
             profilepic: '',
             err: false
         }
+    }
+
+    componentDidMount() {
+        auth.onAuthStateChanged((user) => {
+          if (user) {
+            this.props.navigation.navigate("Login");
+          }
+        });
     }
 
     register(email, pass, userName){
@@ -34,12 +42,8 @@ class Register extends Component {
 
         auth.createUserWithEmailAndPassword(email, pass)
             .then( response => {
-                //Cuando firebase responde sin error
-                
                 console.log('Registrado ok', response);
-
-                 //Cambiar los estados a vacío como están al inicio.
-
+                this.props.navigation.navigate("Login");
             })
             .catch( error => {
                 //Cuando Firebase responde con un error

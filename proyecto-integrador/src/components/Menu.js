@@ -23,8 +23,8 @@ class Menu extends Component {
         <Tab.Navigator>
             <Tab.Screen name="Home" component={Home}/>
             <Tab.Screen name="PostForm" component={PostForm}/>
-            <Tab.Screen name="Profile" component={Profile}/>
             <Tab.Screen name="Search" component={Search}/>
+            <Tab.Screen name="Profile" component={Profile}/>
         </Tab.Navigator>
     );
   }

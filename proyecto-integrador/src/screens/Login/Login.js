@@ -3,8 +3,8 @@ import { auth } from "../../firebase/config";
 import {TextInput, TouchableOpacity, View, Text, StyleSheet,} from "react-native";
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       password: "",
