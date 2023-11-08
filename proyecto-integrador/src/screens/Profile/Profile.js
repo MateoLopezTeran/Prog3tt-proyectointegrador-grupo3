@@ -1,5 +1,5 @@
 import { Component } from "react";
-import {TextInput,TouchableOpacity,View,Text,StyleSheet,FlatList } from "react-native";
+import {TouchableOpacity,View,Text } from "react-native";
 import { auth, db } from "../../firebase/config";
 
 class Profile extends Component {
@@ -12,6 +12,28 @@ class Profile extends Component {
     auth.signOut();
     this.props.navigation.navigate("Login");
   }
+
+  // esto trae la data de usuarios pero no tenemos la coleccion
+
+/*   data() {
+    db.collection("users").onSnapshot(
+      docs => {
+        let usuarios = [];
+        docs.forEach( doc => {
+          usuarios.push({
+            usuario: doc.usuario,
+            minibio: doc.minibio,
+            foto: doc.foto,
+            posteos: doc.posteos,
+          })
+          this.setState({
+            users: usuarios,
+            loading: false
+          })
+        })
+      }
+    )
+  } */
 
   render() {
     console.log(this.state.users);
