@@ -15,7 +15,7 @@ class Post extends Component {
             comments: '',
         }
     }
-
+    
     componentDidMount(){
         //Indicar si el post ya está likeado o no
         let likes = this.props.infoPost.datos.likes
@@ -54,19 +54,59 @@ class Post extends Component {
     }
 
     render(){
-       return (
-        <View>
-            <Text>----------------------------------------------------</Text>
-                <Text>Datos del Post</Text>
-                <Text>Email: {this.props.infoPost.datos.owner}</Text>
-                <Text>Texto: {this.props.infoPost.datos.post}</Text>
-                <Text>Cantidad de Likes: {this.props.infoPost.datos.likes.length}</Text>
-            <TouchableOpacity></TouchableOpacity>
-        </View>
-       )
+        if (users == datos.currentUser) {
+            return (
+                <View>
+                    <Text>----------------------------------------------------</Text>
+                        <Text>Datos del Post</Text>
+                        <Text>Email: {this.props.infoPost.datos.owner}</Text>
+                        <Text>Texto: {this.props.infoPost.datos.post}</Text>
+                        <Text>Cantidad de Likes: {this.props.infoPost.datos.likes.length}</Text>
+                    <TouchableOpacity></TouchableOpacity>
+                </View>
+               )
+               
+        } else () => {
+            return (
+                <Text>No estas logueado</Text>
+            )
+        }
+       
     }
 
 
 }
+
+const styles = StyleSheet.create({
+    formContainer: {
+      paddingHorizontal: 10,
+      marginTop: 20,
+    },
+    input: {
+      height: 20,
+      paddingVertical: 15,
+      paddingHorizontal: 10,
+      borderWidth: 1,
+      borderColor: "#ccc",
+      borderStyle: "solid",
+      borderRadius: 6,
+      marginVertical: 10,
+    },
+    button: {
+      backgroundColor: "salmon",
+      paddingHorizontal: 10,
+      paddingVertical: 6,
+      textAlign: "center",
+      borderRadius: 4,
+      borderWidth: 1,
+      borderStyle: "solid",
+      borderColor: "salmon",
+      width: "30%",
+    },
+    textButton: {
+      color: "#fff",
+    },
+
+  });
 
 export default Post;
