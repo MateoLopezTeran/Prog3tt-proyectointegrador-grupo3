@@ -1,5 +1,5 @@
 import react, { Component } from 'react';
-import { auth } from '../../firebase/config';
+import { auth, db } from '../../firebase/config';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet} from 'react-native';
 
 class Register extends Component {
@@ -24,36 +24,13 @@ class Register extends Component {
     }
 
     register(email, pass, userName){
-        /* if(email === ""){
-            return this.setState({
-                err: "No puedes registarte sin email"
-            })
-        }
-        else if (pass === ""){
-            return this.setState({
-                err: "No puedes registrarte sin contraseña"
-            })
-        }
-        else if (userName === ""){
-            return this.setState({
-                err: "No puedes registrarte sin nombre de usuario"
-            })
-        } */
-
-// aca abajo es agregar datos a una collecion pero esta incompleto y los datos los traemos mal
-
-        /* 
-        db.collection("users").add({
-            usuario: this.props.userName,
-            minibio: this.props.bio,
-            foto: this.props.profilepic,
-            posteos: this.props.posteos,
-            mail: this.props.email
-        }).then()
-        .catch(e => console.log(e)) */
-
         auth.createUserWithEmailAndPassword(email, pass)
             .then( response => {
+                db.collection("users").add({
+                    usuario: userName,
+                    minibio: this.state.bio,
+                    foto: this.state.profilepic,
+                })
                 console.log('Registrado ok', response);
                 this.props.navigation.navigate("Login");
             })
@@ -86,7 +63,7 @@ class Register extends Component {
                 <TextInput
                 style={styles.input}
                 onChangeText={(text)=>this.setState({userName: text})}
-                placeholder='user name'
+                placeholder='userName'
                 keyboardType='default'
                 value={this.state.userName}
                 />
