@@ -40,6 +40,18 @@ class Register extends Component {
             })
         } */
 
+// aca abajo es agregar datos a una collecion pero esta incompleto y los datos los traemos mal
+
+        /* 
+        db.collection("users").add({
+            usuario: this.props.userName,
+            minibio: this.props.bio,
+            foto: this.props.profilepic,
+            posteos: this.props.posteos,
+            mail: this.props.email
+        }).then()
+        .catch(e => console.log(e)) */
+
         auth.createUserWithEmailAndPassword(email, pass)
             .then( response => {
                 console.log('Registrado ok', response);
