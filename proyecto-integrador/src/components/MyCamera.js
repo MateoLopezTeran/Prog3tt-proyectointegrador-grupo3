@@ -46,16 +46,16 @@ class MyCamera extends Component {
         fetch(this.state.foto)
         .then(res => res.blob())
         .then(image => {
-            const ref = storage.ref(`foto/${Date.now()}.jpg`)
+            const ref = storage.ref(`photo/${Date.now()}.jpg`)
             ref.put(image)
-            .then(() => {
-                ref.getDownloadURL()
-                .then(url => {
-                    this.props.onImageUpLoad(url)
-                })
-            })
-        })
-        .catch(err => console.log(err))
+            .then( () => {
+             ref.getDownloadURL()
+             .then( url => {
+                 this.props.onImageUpload(url)
+             })
+             })
+         })
+         .catch(e => console.log(e))
     }
 
     render(){

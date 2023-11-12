@@ -19,6 +19,7 @@ class PostForm extends Component {
             post: this.state.post,
             foto: this.state.url,
             likes:[],
+            comments: [],
             createdAt: Date.now()
         })
         .then(console.log('Posteaste correctamente'))
@@ -37,7 +38,7 @@ class PostForm extends Component {
             <View>
                 <Text>PostForm</Text>
 
-                {this.state.showCamera ? <MyCamera onImageUpload={(url) => this.onImageUpload(url)}/> :
+                { this.state.showCamera? <MyCamera onImageUpload={(url) => this.onImageUpload(url)}/> :
                 <>
                 <TextInput style={styles.input} onChangeText={(text) => this.setState({post:text})} placeholder='Escribí un post' keyboardType="default" value={this.state.post}/>
                 <TouchableOpacity style={styles.button} onPress={() => this.postear()}>
