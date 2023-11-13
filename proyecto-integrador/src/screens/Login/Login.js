@@ -71,23 +71,17 @@ class Login extends Component {
           value={this.state.password}
         />
         <TouchableOpacity style={styles.button}
-          onPress={() => this.login(this.state.email, this.state.password)}
-        >
-
-        
-
+          onPress={() => this.login(this.state.email, this.state.password)}>
           <Text style={styles.textButton}>Ingresar</Text>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.button}
-        
-          onPress={() => this.props.navigation.navigate("Register")}
-        >
+          onPress={() => this.props.navigation.navigate("Register")}>
           <Text style={styles.textButton}>Crear cuenta</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button}
-        onPress={() => this.rememberMe(this.state.email, this.state.password)}>
-            <Text style={styles.textButton}>Remember me</Text>
+        <TouchableOpacity style={styles.button} onPress={() => this.rememberMe(this.state.email, this.state.password)}>
+          <Text style={styles.textButton}>Remember me</Text>
         </TouchableOpacity>
       </View>
     );

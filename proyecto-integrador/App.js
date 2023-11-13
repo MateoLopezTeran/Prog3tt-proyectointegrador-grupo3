@@ -5,10 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Register from './src/screens/Register/Register';
 import Login from './src/screens/Login/Login';
 import Menu from './src/components/Menu';
-
-// Hola probando
-
-//segundo comentario
+import Comentario from './src/screens/Comentario/Comentario';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +29,12 @@ export default function App() {
           name="Menu"
           component={Menu}
           options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Comentario"
+          component={Comentario}
+          options={{ headerShown: true }}
         />
       </Stack.Navigator>
     </NavigationContainer>

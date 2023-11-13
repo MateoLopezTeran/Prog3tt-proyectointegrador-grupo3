@@ -74,7 +74,7 @@ class Profile extends Component {
           false}
         </View>
         <Text>Mis posteos</Text>
-        {this.state.posteos === 0 
+        {/* {this.state.posteos === 0 
         ?
         <Text style = {styles.texto}>Cargando...</Text>
         :
@@ -82,7 +82,7 @@ class Profile extends Component {
             data= {this.state.posteos}
             keyExtractor={ unPost => unPost.id }
             renderItem={ ({item}) => <Post infoPost = { item } /> }
-          />}
+          />} */}
       </View>
     );
   }

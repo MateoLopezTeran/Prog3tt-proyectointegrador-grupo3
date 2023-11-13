@@ -85,7 +85,6 @@ class Post extends Component {
         return (
             <View style = {styles.formContainer}>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate("Profile")}>
-                    
                     <Text style = {styles.textButton}>{this.props.infoPost.datos.owner}</Text>
                 </TouchableOpacity>
                 <Text style = {styles.textButton}>Descripción: {this.props.infoPost.datos.post}</Text>
@@ -101,6 +100,11 @@ class Post extends Component {
                     <Text style = {styles.textButton}>Likes: <AntDesign name="dislike2" size={24} color="black" /> {this.props.infoPost.datos.likes.length}</Text>
                 </TouchableOpacity>}
                 
+                <TouchableOpacity style={styles.buttonCommentariosTotales} onPress={() => this.props.navigation.navigate("Comentario")}>
+                    <Text style = {styles.textButton}>Cantidad total de comentarios</Text>
+                </TouchableOpacity>
+
+
                 {/* <FlatList 
                     data= {this.props.infoPost.datos.comments}
                     keyExtractor={ unPost => unPost.id }
@@ -154,7 +158,7 @@ const styles = StyleSheet.create({
         borderStyle: "solid",
         borderRadius: 6,
         marginVertical: 10,
-        width: 225
+        width: 225,
       },
     button: {
       backgroundColor: "white",
@@ -179,6 +183,17 @@ const styles = StyleSheet.create({
         width: "30%",
         height: '60%',
         marginLeft: 10,
+        marginTop: 10
+    },
+    buttonCommentariosTotales: {
+        backgroundColor: "grey",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        borderRadius: 7,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "black",
+        width: "64%",
         marginTop: 10
     },
     seccionComments: {
