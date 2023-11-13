@@ -51,6 +51,7 @@ class Profile extends Component {
 
   render() {
     console.log(this.state.profile);
+    console.log(this.state.profile);
     return (
       <View>
         <br/>
