@@ -1,32 +1,11 @@
 import { Component } from "react";
-import {TouchableOpacity,View,Text, FlatList } from "react-native";
+import {TouchableOpacity,View,Text } from "react-native";
 import { auth, db } from "../../firebase/config";
 
 class Profile extends Component {
   constructor() {
     super();
-    this.state = {
-      profile: []
-    };
-  }
-
-  componentDidMount(){
-    db.collection("users").where('owner', '==', auth.currentUser.email).onSnapshot(
-      docs => {
-        let profile = [];
-        docs.forEach( doc => {
-          profile.push({
-          usuario: doc.usuario,
-          minibio: doc.minibio,
-          foto: doc.foto,
-          })
-          this.setState({
-            profile: profile,
-            loading: false
-          })
-        })
-      }
-    )
+    this.state = {};
   }
 
   logout() {
@@ -34,22 +13,41 @@ class Profile extends Component {
     this.props.navigation.navigate("Login");
   }
 
+  // esto trae la data de usuarios pero no tenemos la coleccion
+
+    data() {
+    db.collection("users").onSnapshot(
+      docs => {
+        let usuarios = [];
+        docs.forEach( doc => {
+          usuarios.push({
+            usuario: doc.usuario,
+            minibio: doc.minibio,
+            foto: doc.foto
+          })
+          this.setState({
+            users: usuarios,
+            loading: false
+          })
+        })
+      }
+    )
+  } 
+
   render() {
-    console.log(this.state.profile);
+    console.log(this.state.users);
     return (
       <View>
-        <Text>User</Text>
-        <View>
-          <Text>{auth.currentUser.email}</Text>
-          <FlatList 
-            data= {this.state.profile}
-            keyExtractor={ profiles => profiles.id }
-            renderItem={ ({item}) => <Text>Username: {item.data.username}</Text> }
-          />
+        <Text>User:</Text>
+        <Text>Nombre de Usuario: {this.state.users.usuario}</Text>
+        <Text>Biografia: {this.state.users.minibio}</Text>
+        <Text>Foto</Text>
+        {/* falta saber poner la foto */}
+
         <TouchableOpacity onPress={() => this.logout()}>
           <Text>Logout</Text>
         </TouchableOpacity>
-        </View>
+
       </View>
     );
   }
