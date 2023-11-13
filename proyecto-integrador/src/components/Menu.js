@@ -20,7 +20,7 @@ class Menu extends Component {
     return (
         <Tab.Navigator>
             <Tab.Screen name="Home" component={Home}/>
-            <Tab.Screen name="Newpost" component={PostForm}/>
+            <Tab.Screen name="NewPost" component={PostForm}/>
             <Tab.Screen name="Search" component={Search}/>
             <Tab.Screen name="Profile" component={Profile}/>
         </Tab.Navigator>

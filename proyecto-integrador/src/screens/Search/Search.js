@@ -10,9 +10,9 @@ class Search extends Component {
     }
 
     actualizarInput(){
-        //que me muestre el usuario logueado que estoy clickeando
+        //que me muestre el usuario que estoy clickeando
         if (this.render.userId != "") {
-            <Profile props = {this.id} ></Profile>
+            <Profile props = {this.id}></Profile>
         }
     }
 

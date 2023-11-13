@@ -85,6 +85,7 @@ class Post extends Component {
         return (
             <View style = {styles.formContainer}>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate("Profile")}>
+                    
                     <Text style = {styles.textButton}>{this.props.infoPost.datos.owner}</Text>
                 </TouchableOpacity>
                 <Text style = {styles.textButton}>Descripción: {this.props.infoPost.datos.post}</Text>

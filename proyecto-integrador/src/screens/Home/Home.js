@@ -1,5 +1,5 @@
 import react, { Component } from "react";
-import {TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList} from "react-native";
+import {TouchableOpacity, View, Text, StyleSheet, FlatList} from "react-native";
 import Post from '../../components/Post'
 import { auth, db } from "../../firebase/config";
 
