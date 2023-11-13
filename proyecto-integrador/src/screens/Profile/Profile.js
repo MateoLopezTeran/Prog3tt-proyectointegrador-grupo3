@@ -74,6 +74,9 @@ class Profile extends Component {
           false}
         </View>
 
+
+        <br/>
+        <View>
         <Text style = {styles.texto}>Mis posteos:</Text>
         {/* {this.state.posteos === 0 
         ?
@@ -84,11 +87,12 @@ class Profile extends Component {
             keyExtractor={ unPost => unPost.id }
             renderItem={ ({item}) => <Post infoPost = { item } /> }
           />} */}
+        </View>
 
-          <br/>
-          <TouchableOpacity style={styles.button} onPress={() => this.logout()}>
-            <Text style = {styles.texto} >Logout</Text>
-          </TouchableOpacity>
+        <br/>
+        <TouchableOpacity style={styles.button} onPress={() => this.logout()}>
+          <Text style = {styles.texto} >Logout</Text>
+        </TouchableOpacity>
           
 
       </View>
@@ -110,8 +114,8 @@ const styles = StyleSheet.create({
   seccionProfile: {
     flex: 1,
     flexDirection: 'column',
-    textAlign: "center",
-    justifyContent: "space-around",
+    width: 200,
+    justifyContent: "center"
 },
   button: {
     backgroundColor: "red",
@@ -126,7 +130,7 @@ const styles = StyleSheet.create({
     width: 80,
 },
   texto: {
-    textAlign: "center",
+    textAlign: "left",
     color: "black",
     fontSize: 15,
 },

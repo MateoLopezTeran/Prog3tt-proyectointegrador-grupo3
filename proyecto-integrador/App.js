@@ -8,6 +8,8 @@ import Menu from './src/components/Menu';
 
 // Hola probando
 
+//segundo comentario
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
