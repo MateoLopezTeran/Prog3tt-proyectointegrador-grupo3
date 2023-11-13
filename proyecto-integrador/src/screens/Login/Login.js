@@ -100,6 +100,7 @@ const styles = new StyleSheet.create({
     marginTop: 20,
   },
   input: {
+    textAlign: "center",
     height: 20,
     paddingVertical: 15,
     paddingHorizontal: 10,

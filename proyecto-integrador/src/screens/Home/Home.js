@@ -1,5 +1,5 @@
 import react, { Component } from "react";
-import {TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList} from "react-native";
+import {TouchableOpacity, View, Text, StyleSheet, FlatList} from "react-native";
 import Post from '../../components/Post'
 import { auth, db } from "../../firebase/config";
 
@@ -34,7 +34,7 @@ class Home extends Component {
   render() {
     console.log(this.state.listaPost);
     return (
-      <View style={styles.container}>
+      <>
         <Text>Lista de Posteos</Text>
           {this.state.listaPost.length === 0 
           ?
@@ -43,9 +43,9 @@ class Home extends Component {
           <FlatList 
             data= {this.state.listaPost}
             keyExtractor={ unPost => unPost.id }
-            renderItem={ ({item}) => <Post infoPost = { item } /> }
+            renderItem={ ({item}) => <Post infoPost = { item } navigation = {this.props.navigation}/> }
           />}
-      </View>
+      </>
     );
   }
 }

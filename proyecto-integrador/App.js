@@ -6,6 +6,9 @@ import Register from './src/screens/Register/Register';
 import Login from './src/screens/Login/Login';
 import Menu from './src/components/Menu';
 
+// Hola probando
+
+//segundo comentario
 
 const Stack = createNativeStackNavigator();
 

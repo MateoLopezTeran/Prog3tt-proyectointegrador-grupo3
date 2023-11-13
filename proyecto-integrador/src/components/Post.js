@@ -81,9 +81,11 @@ class Post extends Component {
     }
 
     render(){
+        console.log(this.props);
         return (
             <View style = {styles.formContainer}>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate("Menu")}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate("Profile")}>
+                    
                     <Text style = {styles.textButton}>{this.props.infoPost.datos.owner}</Text>
                 </TouchableOpacity>
                 <Text style = {styles.textButton}>Descripción: {this.props.infoPost.datos.post}</Text>
