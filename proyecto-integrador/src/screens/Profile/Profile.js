@@ -53,37 +53,44 @@ class Profile extends Component {
     console.log(this.state.profile);
     return (
       <View>
-        <Text>User</Text>
+        <br/>
         <View style={styles.seccionProfile}>
 
-          <Text style = {styles.texto}>{auth.currentUser.email}</Text>
-
+          <Text style = {styles.texto}>Usuario: {auth.currentUser.email}</Text>
           { this.state.profile.length > 0 
           ? 
-          <Text>Usuario: {this.state.profile[0].data.usuario}</Text>
+          <Text style = {styles.texto}>Foto de Perfil: {this.state.profile[0].data.foto}</Text>
           : 
           false}
           { this.state.profile.length > 0 
           ? 
-          <Text>Biografia: {this.state.profile[0].data.minibio}</Text>
+          <Text style = {styles.texto}>Nombre de Usuario: {this.state.profile[0].data.usuario}</Text>
           : 
           false}
-
-          <TouchableOpacity onPress={() => this.logout()}>
-            <Text>Logout</Text>
-          </TouchableOpacity>
-          
+          { this.state.profile.length > 0 
+          ? 
+          <Text style = {styles.texto}>Biografia: {this.state.profile[0].data.minibio}</Text>
+          : 
+          false}
         </View>
-        <Text>Mis posteos</Text>
+
+        <Text style = {styles.texto}>Mis posteos:</Text>
         {/* {this.state.posteos === 0 
         ?
-        <Text>Cargando...</Text>
+        <Text style = {styles.texto}>Cargando...</Text>
         :
         <FlatList 
             data= {this.state.posteos}
             keyExtractor={ unPost => unPost.id }
             renderItem={ ({item}) => <Post infoPost = { item } /> }
           />} */}
+
+          <br/>
+          <TouchableOpacity style={styles.button} onPress={() => this.logout()}>
+            <Text style = {styles.texto} >Logout</Text>
+          </TouchableOpacity>
+          
+
       </View>
     );
   }
@@ -95,19 +102,34 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingLeft: 10,
     margin: 15,
+    textAlign: "center",
     backgroundColor: 'lightgrey',
     borderRadius: 5,
 
   },
   seccionProfile: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: "space-around"
+    flexDirection: 'column',
+    textAlign: "center",
+    justifyContent: "space-around",
+},
+  button: {
+    backgroundColor: "red",
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    textAlign: "center",
+    borderRadius: 4,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "#28a745",
+    margin: 5,
+    width: 80,
 },
   texto: {
+    textAlign: "center",
     color: "black",
     fontSize: 15,
-  },
+},
 });
 
 export default Profile;
