@@ -54,26 +54,36 @@ class Profile extends Component {
     console.log(this.state.profile);
     return (
       <View>
-        <View style={styles.seccionProfile}>
+      <br/>
+      <View style={styles.orden}>
+      <View style={styles.foto}>
+      <Text>Foto de Perfil: </Text>
+      { this.state.profile.length > 0 
+        ? 
+        <Text>{this.state.profile[0].data.foto}</Text>
 
-          <Text style = {styles.texto}>Usuario: {auth.currentUser.email}</Text>
-          { this.state.profile.length > 0 
-          ? 
-          <Text style = {styles.texto}>Foto de Perfil: {this.state.profile[0].data.foto}</Text>
-          : 
-          false}
-          { this.state.profile.length > 0 
-          ? 
-          <Text style = {styles.texto}>Nombre de Usuario: {this.state.profile[0].data.usuario}</Text>
-          : 
-          false}
-          { this.state.profile.length > 0 
-          ? 
-          <Text style = {styles.texto}>Biografia: {this.state.profile[0].data.minibio}</Text>
-          : 
-          false}
-        </View>
-        <Text>Mis posteos</Text>
+        : 
+        false}
+      </View>
+      <View style={styles.seccionProfile}>
+
+        <Text style = {styles.texto}>Usuario: {auth.currentUser.email}</Text>
+        { this.state.profile.length > 0 
+        ? 
+        <Text style = {styles.texto}>Nombre de Usuario: {this.state.profile[0].data.usuario}</Text>
+        : 
+        false}
+        { this.state.profile.length > 0           ? 
+        <Text style = {styles.texto}>Biografia: {this.state.profile[0].data.minibio}</Text>
+        : 
+        false}
+      </View>
+      </View>
+
+
+        <br/>
+        <View style = {styles.seccionDos}>
+        <Text style = {styles.texto}>Mis posteos:</Text>
         {/* {this.state.posteos === 0 
         ?
         <Text style = {styles.texto}>Cargando...</Text>
@@ -83,45 +93,61 @@ class Profile extends Component {
             keyExtractor={ unPost => unPost.id }
             renderItem={ ({item}) => <Post infoPost = { item } /> }
           />} */}
+        </View>
+
+        <br/>
+        <TouchableOpacity style={styles.button} onPress={() => this.logout()}>
+          <Text style = {styles.texto} >Logout</Text>
+        </TouchableOpacity>
+          
+
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  formContainer: {
-    paddingTop: 5,
-    paddingBottom: 10,
-    paddingLeft: 10,
-    margin: 15,
-    textAlign: "center",
-    backgroundColor: 'lightgrey',
-    borderRadius: 5,
-
+  orden: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  foto: {
+    width: 170,
+    height: 200,
   },
   seccionProfile: {
     flex: 1,
     flexDirection: 'column',
+    paddingBottom: 100,
+    height: 200,
     width: 200,
-    justifyContent: "center"
-},
+    justifyContent: "center",
+  },
+  seccionDos: {
+    paddingTop: 5,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    flex: 1,
+    justifyContent:"flex-start",
+  },
+  texto: {
+    textAlign: "left",
+    color: "black",
+    fontSize: 15,
+  },
   button: {
     backgroundColor: "red",
     paddingHorizontal: 10,
     paddingVertical: 6,
-    textAlign: "center",
+    justifyContent: "center",
     borderRadius: 4,
     borderWidth: 1,
     borderStyle: "solid",
     borderColor: "#28a745",
     margin: 5,
     width: 80,
-},
-  texto: {
-    textAlign: "left",
-    color: "black",
-    fontSize: 15,
-},
+  },
+
 });
 
 export default Profile;
