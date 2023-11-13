@@ -53,7 +53,6 @@ class Profile extends Component {
     console.log(this.state.profile);
     return (
       <View>
-        <Text>User</Text>
         <View style={styles.seccionProfile}>
 
           <Text style = {styles.texto}>{auth.currentUser.email}</Text>
@@ -75,7 +74,7 @@ class Profile extends Component {
           
         </View>
         <Text>Mis posteos</Text>
-        {/* {this.state.posteos === 0 
+        {this.state.posteos === 0 
         ?
         <Text>Cargando...</Text>
         :
@@ -83,7 +82,7 @@ class Profile extends Component {
             data= {this.state.posteos}
             keyExtractor={ unPost => unPost.id }
             renderItem={ ({item}) => <Post infoPost = { item } /> }
-          />} */}
+          />}
       </View>
     );
   }
