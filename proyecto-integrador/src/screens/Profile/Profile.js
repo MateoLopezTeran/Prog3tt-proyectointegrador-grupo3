@@ -18,9 +18,8 @@ class Profile extends Component {
         let profile = [];
         docs.forEach( doc => {
           profile.push({
-            usuario: doc.usuario,
-            minibio: doc.minibio,
-            foto: doc.foto
+           id: doc.id,
+           data: doc.data()
           })
           this.setState({
             profile: profile,
@@ -56,15 +55,24 @@ class Profile extends Component {
       <View>
         <Text>User</Text>
         <View style={styles.seccionProfile}>
+
           <Text style = {styles.texto}>{auth.currentUser.email}</Text>
-          <FlatList 
-            data= {this.state.profile}
-            keyExtractor={ profiles => profiles.id }
-            renderItem={ ({item}) => <Text>Username: {item.data.username}</Text> }
-          />
+
+          { this.state.profile.length > 0 
+          ? 
+          <Text>Usuario: {this.state.profile[0].data.usuario}</Text>
+          : 
+          false}
+          { this.state.profile.length > 0 
+          ? 
+          <Text>Biografia: {this.state.profile[0].data.minibio}</Text>
+          : 
+          false}
+
           <TouchableOpacity onPress={() => this.logout()}>
             <Text>Logout</Text>
           </TouchableOpacity>
+          
         </View>
         <Text>Mis posteos</Text>
         {/* {this.state.posteos === 0 
