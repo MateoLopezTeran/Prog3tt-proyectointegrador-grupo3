@@ -9,6 +9,13 @@ class Search extends Component {
         }
     }
 
+    actualizarInput(){
+        //que me muestre el usuario logueado que estoy clickeando
+        if (this.render.userId != "") {
+            <Profile props = {this.id} ></Profile>
+        }
+    }
+
     render(){
         return(
             <Text>Search</Text>
@@ -16,4 +23,4 @@ class Search extends Component {
     }
 }
 
-export default Search
+export default Search;

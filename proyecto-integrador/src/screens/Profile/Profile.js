@@ -18,8 +18,15 @@ class Profile extends Component {
         let profile = [];
         docs.forEach( doc => {
           profile.push({
+<<<<<<< HEAD
            id: doc.id,
            data: doc.data()
+=======
+            owner: doc.owner,
+            usuario: doc.usuario,
+            minibio: doc.minibio,
+            foto: doc.foto
+>>>>>>> 4389b21 (render profile)
           })
           this.setState({
             profile: profile,
@@ -50,6 +57,7 @@ class Profile extends Component {
   }
 
   render() {
+    console.log(this.state.profile);
     console.log(this.state.profile);
     return (
       <View>
