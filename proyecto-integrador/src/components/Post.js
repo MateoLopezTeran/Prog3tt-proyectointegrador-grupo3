@@ -102,13 +102,6 @@ class Post extends Component {
                 <TouchableOpacity style={styles.buttonCommentariosTotales} onPress={() => this.props.navigation.navigate("Comentario")}>
                     <Text style = {styles.textButton}>Cantidad total de comentarios</Text>
                 </TouchableOpacity>
-
-
-                {/* <FlatList 
-                    data= {this.props.infoPost.datos.comments}
-                    keyExtractor={ unPost => unPost.id }
-                    renderItem={ ({item}) => <Post infoPost = { item } /> }
-                /> */}
                 <View style={styles.seccionComments}>
                     <TextInput
                     style={styles.inputComments}

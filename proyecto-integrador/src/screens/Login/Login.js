@@ -41,16 +41,6 @@ class Login extends Component {
       });
   }
 
-  rememberMe(){
-    if (this.state.email === this.props.email.users){
-      //Redirigir al usuario a la home del sitio.
-      this.props.navigation.navigate("Home")
-    } else if (this.state.email != this.props.email.users){
-      //Redirigir al usuario a la login del sitio.
-      this.props.navigation.navigate("Login")
-    }
-  }
-
   render() {
     return (
       <View style={styles.formContainer}>
@@ -78,10 +68,6 @@ class Login extends Component {
         <TouchableOpacity style={styles.button}
           onPress={() => this.props.navigation.navigate("Register")}>
           <Text style={styles.textButton}>Crear cuenta</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => this.rememberMe(this.state.email, this.state.password)}>
-          <Text style={styles.textButton}>Remember me</Text>
         </TouchableOpacity>
       </View>
     );

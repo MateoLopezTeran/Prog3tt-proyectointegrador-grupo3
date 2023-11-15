@@ -7,12 +7,12 @@ class Comentario extends Component {
     constructor(props){
         super(props)
         this.state={
-            listaComments: []
+            listaComments:[]
         }
     }
 
     componentDidMount(){
-        db.collection('posts').onSnapshot(
+        db.collection('posts').where(this.state.listaComments[0].id, '==').onSnapshot(
             comentarios => {
                 let comentariosAMostrar = [];
                 comentarios.forEach( unComentario => {
@@ -30,6 +30,8 @@ class Comentario extends Component {
 
     // cree un nuevo componente y screen para comentarios pero no se si esta bien. Hay que ver si se puede iterar la FlatList
     render(){
+        console.log(this.props);
+        {this.state.listaComments.length > 0 ? console.log(this.state.listaComments[0].datos): false}
         return(
             <View>
                 <Text>Comentarios</Text>
@@ -40,7 +42,7 @@ class Comentario extends Component {
                 <FlatList 
                     data= {this.state.listaComments}
                     keyExtractor={ unComentario => unComentario.id }
-                    renderItem={ ({item}) => <PostComentario infoPostComentario = { item } navigation = {this.props.navigation}/> }
+                    renderItem={ ({item}) => <PostComentario infoPostComentario = { item } navigation = {this.props.navigation} id = {this.state.listaComments.id}/> }
                 />}
             </View>
         )
