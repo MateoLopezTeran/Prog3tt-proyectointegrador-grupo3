@@ -18,7 +18,6 @@ class Post extends Component {
     }
     
     componentDidMount(){
-        //Indicar si el post ya está likeado o no
         let likes = this.props.infoPost.datos.likes
 
         if(likes.length === 0){

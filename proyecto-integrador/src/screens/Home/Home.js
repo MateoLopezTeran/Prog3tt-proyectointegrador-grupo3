@@ -6,29 +6,27 @@ import { auth, db } from "../../firebase/config";
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {listaPost: []};
+    this.state = {
+      listaPost: []
+    };
   }
 
   componentDidMount(){
     db.collection('posts').onSnapshot(
-        posteos => {
-            let postsAMostrar = [];
-
-            posteos.forEach( unPost => {
-                postsAMostrar.push(
-                    {
-                        id: unPost.id,
-                        datos: unPost.data()
-                    }
-                )
-            })
-
-            this.setState({
-                listaPost: postsAMostrar
-            })
-        }
+      posteos => {
+        let postsAMostrar = [];
+        posteos.forEach( unPost => {
+          postsAMostrar.push({
+            id: unPost.id,
+            datos: unPost.data()
+          })
+        })
+        this.setState({
+          listaPost: postsAMostrar
+        })
+      }
     )
-}
+  }
 
 
   render() {

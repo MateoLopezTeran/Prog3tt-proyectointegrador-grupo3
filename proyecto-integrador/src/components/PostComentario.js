@@ -1,47 +1,25 @@
 import react, { Component } from 'react';
-import {View, Text, StyleSheet, FlatList, Image} from 'react-native';
-import { db } from '../../firebase/config';
-import PostComentario from '../../components/PostComentario';
+import {TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList, Image} from 'react-native';
+import { auth, db } from '../firebase/config';
+import firebase from 'firebase';
 
-class Comentario extends Component {
+class PostComentario extends Component {
     constructor(props){
         super(props)
         this.state={
-            listaComments: []
+            img: '',
+            description: '',
+            date: '',
+            email: '',
+            likes: '',
+            comments: '',
         }
     }
 
-    componentDidMount(){
-        db.collection('posts').onSnapshot(
-            comentarios => {
-                let comentariosAMostrar = [];
-                comentarios.forEach( unComentario => {
-                    comentariosAMostrar.push({
-                            id: unComentario.id,
-                            datos: unComentario.data()
-                        })
-                })
-                this.setState({
-                    listaComments: comentariosAMostrar
-                })
-            }
-        )
-    }
-
-    // cree un nuevo componente y screen para comentarios pero no se si esta bien. Hay que ver si se puede iterar la FlatList
     render(){
         return(
             <View>
-                <Text>Comentarios</Text>
-                {this.state.listaComments.length === 0 
-                ?
-                <Text>Cargando...</Text>
-                :
-                <FlatList 
-                    data= {this.state.listaComments}
-                    keyExtractor={ unComentario => unComentario.id }
-                    renderItem={ ({item}) => <PostComentario infoPostComentario = { item } navigation = {this.props.navigation}/> }
-                />}
+                <Text style = {styles.textButton}>{this.props.infoPostComentario.datos.comments}</Text>
             </View>
         )
     }
@@ -129,4 +107,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Comentario;
+export default PostComentario
