@@ -1,25 +1,29 @@
 import react, { Component } from 'react';
-import {View, Text, StyleSheet, FlatList, Image} from 'react-native';
+import {View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity} from 'react-native';
 import { db } from '../../firebase/config';
 import PostComentario from '../../components/PostComentario';
+import firebase from 'firebase';
 
 class Comentario extends Component {
     constructor(props){
         super(props)
         this.state={
-            listaComments:[]
+            listaComments:[],
+            comments: ''
         }
     }
 
     componentDidMount(){
-        db.collection('posts').where(this.state.listaComments[0].id, '==').onSnapshot(
+        db.collection('posts').onSnapshot(
             comentarios => {
                 let comentariosAMostrar = [];
                 comentarios.forEach( unComentario => {
-                    comentariosAMostrar.push({
+                    if (unComentario.id == this.props.route.params.id.id) {
+                        comentariosAMostrar.push({
                             id: unComentario.id,
                             datos: unComentario.data()
                         })
+                    }
                 })
                 this.setState({
                     listaComments: comentariosAMostrar
@@ -28,10 +32,21 @@ class Comentario extends Component {
         )
     }
 
+    Comentario(){
+        db.collection("posts").doc(this.props.route.params.id.id).update({
+            comments: firebase.firestore.FieldValue.arrayUnion(this.state.comments)
+        })
+        .then(
+            this.setState({
+                comments: ''
+            })
+        )
+    }
+
     // cree un nuevo componente y screen para comentarios pero no se si esta bien. Hay que ver si se puede iterar la FlatList
     render(){
-        console.log(this.props);
-        {this.state.listaComments.length > 0 ? console.log(this.state.listaComments[0].datos): false}
+        console.log(this.state.listaComments);
+        console.log(this.props.route.params.id.id);
         return(
             <View>
                 <Text>Comentarios</Text>
@@ -44,6 +59,20 @@ class Comentario extends Component {
                     keyExtractor={ unComentario => unComentario.id }
                     renderItem={ ({item}) => <PostComentario infoPostComentario = { item } navigation = {this.props.navigation} id = {this.state.listaComments.id}/> }
                 />}
+                <View style={styles.seccionComments}>
+                    <TextInput
+                    style={styles.inputComments}
+                    onChangeText={(text) => this.setState({ comments: text })}
+                    placeholder="Insertar comentario"
+                    keyboardType="default"
+                    value={this.state.comments}
+                    />
+                    {this.state.comments === '' ? null : 
+                        <TouchableOpacity style={styles.buttonComments} onPress={() => this.Comentario()}>
+                            <Text style={styles.textButton}>Comentar</Text>
+                        </TouchableOpacity>
+                    }
+                </View>
             </View>
         )
     }

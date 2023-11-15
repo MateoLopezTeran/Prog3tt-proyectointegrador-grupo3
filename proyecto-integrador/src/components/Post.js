@@ -99,7 +99,7 @@ class Post extends Component {
                     <Text style = {styles.textButton}>Likes: <AntDesign name="dislike2" size={24} color="black" /> {this.props.infoPost.datos.likes.length}</Text>
                 </TouchableOpacity>}
                 
-                <TouchableOpacity style={styles.buttonCommentariosTotales} onPress={() => this.props.navigation.navigate("Comentario")}>
+                <TouchableOpacity style={styles.buttonCommentariosTotales} onPress={() => this.props.navigation.navigate("Comentario", {id: this.props.infoPost})}>
                     <Text style = {styles.textButton}>Cantidad total de comentarios</Text>
                 </TouchableOpacity>
                 <View style={styles.seccionComments}>
