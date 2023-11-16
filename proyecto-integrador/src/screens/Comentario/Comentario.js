@@ -49,12 +49,11 @@ class Comentario extends Component {
         console.log(this.props.route.params.id.id);
         return(
             <View>
-                <Text>Comentarios</Text>
                 {this.state.listaComments.length === 0 
                 ?
                 <Text>Cargando...</Text>
                 :
-                <FlatList 
+                <FlatList
                     data= {this.state.listaComments}
                     keyExtractor={ unComentario => unComentario.id }
                     renderItem={ ({item}) => <PostComentario infoPostComentario = { item } navigation = {this.props.navigation} id = {this.state.listaComments.id}/> }
@@ -80,8 +79,9 @@ class Comentario extends Component {
 
 const styles = StyleSheet.create({
     formContainer: {
+      flex: 1,
+      flexDirection: 'column',
       paddingTop: 5,
-      paddingBottom: 10,
       paddingLeft: 10,
       margin: 15,
       backgroundColor: 'lightgrey',
