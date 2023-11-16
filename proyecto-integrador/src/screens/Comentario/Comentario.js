@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
         borderStyle: "solid",
         borderColor: "black",
         width: "30%",
-        height: '60%',
+        height: '130%',
         marginLeft: 10,
         marginTop: 10
     },

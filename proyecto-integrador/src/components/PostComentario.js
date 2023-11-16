@@ -1,5 +1,5 @@
 import react, { Component } from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Flatlist} from 'react-native';
 import { auth, db } from '../firebase/config';
 import firebase from 'firebase';
 
@@ -17,8 +17,14 @@ class PostComentario extends Component {
     }
 
     render(){
+        console.log(this.props.infoPostComentario.datos.comments);
         return(
             <View style={styles.formContainer}>
+                {/* <Flatlist
+                    data= {this.props.infoPostComentario.datos.comments}
+                    keyExtractor={ id => id.toString() }
+                    renderItem={ ({item}) => <Text style = {styles.textButton}>{item}</Text> }
+                /> */}
                 <Text style = {styles.textButton}>{this.props.infoPostComentario.datos.comments}</Text>
             </View>
         )
