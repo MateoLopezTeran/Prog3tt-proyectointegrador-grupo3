@@ -17,19 +17,17 @@ class PostComentario extends Component {
     }
 
     render(){
-        console.log(this.props.infoPostComentario.datos.comments);
         return(
-            <View>
-                <Text style={styles.formContainer}>Lista de Comentarios: </Text>
-                <View style={styles.formContainer}>
+            <View style={styles.contenedor}>
+                <View>
                 {this.props.infoPostComentario.datos.comments.length === 0 
                 ?
-                <Text>Cargando...</Text>
+                <Text>Aún no hay comentarios</Text>
                 :
                 <FlatList
                     data= {this.props.infoPostComentario.datos.comments}
                     keyExtractor={ id => id.toString() }
-                    renderItem={ ({item}) => <Text style = {styles.textButton}>{item}</Text> }
+                    renderItem={ ({item}) => <Text style={styles.ContCom}>{item}</Text> }
                 /> }
                 </View>
             </View>
@@ -38,18 +36,20 @@ class PostComentario extends Component {
 }
 
 const styles = StyleSheet.create({
-    formContainer: {
+    contenedor: {
+        flex: 1,
+       justifyContent: 'center',
+       alignContent: 'center',
+      },
+    ContCom: {
+      flex: 1,
       paddingTop: 5,
       paddingBottom: 10,
       paddingLeft: 10,
-      margin: 15,
+      margin: 4,
       backgroundColor: 'lightgrey',
       borderRadius: 5,
-    },
-    textButton: {
-      color: "black",
-      fontSize: 15,
-    },
+      },
 });
 
 export default PostComentario
