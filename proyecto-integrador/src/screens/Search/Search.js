@@ -1,104 +1,88 @@
-import react, { Component } from 'react';
-import {Image, TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList, ScrollView} from 'react-native';
-import { db, auth } from '../../firebase/config';
+import React, { Component } from "react";
+import { TextInput, View, Text, FlatList, TouchableOpacity, StyleSheet , Image} from "react-native";
+import { auth, db } from "../../firebase/config";
 
 class Search extends Component {
-    constructor(props){
-        super(props);
-        this.state={
-            todosUsers: [],
-            usersFiltrados: [],
-            searchText: ''
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+    
+        resultados: [],
+        busqueda: "",
+        unSoloUsuario: "",
+    };
+  }
+
+    componentDidMount() {
+        db.collection("users").onSnapshot((search) => {
+        let resultadosBusqueda = [];
+                search.forEach((doc) => {
+            resultadosBusqueda.push({
+            id: doc.id,
+            datos: doc.data(),
+            });
+        });
+
+        this.setState({
+            //guardamos los resultados de la busqueda en el estado de resultados
+            resultados: resultadosBusqueda,
+        });
+        });
     }
 
-    componentDidMount(){
-        //Traer datos
-        db.collection('users').onSnapshot(
-            usuarios => {
-                let usersDeDb = [];
+  render() {
+    //filtramos el estado de los resultados
+    const usuariosEncontrados = this.state.resultados.filter((user) =>
+      user.datos.usuario.includes(this.state.busqueda.toLowerCase())
+    );
 
-                usuarios.forEach( unUsuario => {
-                    usersDeDb.push(
-                        {
-                            id: unUsuario.id,
-                            datos: unUsuario.data()
-                        }
-                    )
-                })
+    return (
+      <View >
+        <TextInput
+           
+            style={styles.input}
+            keyboardType="default"
+            placeholder="Busca"
+            onChangeText={(cadena) => this.setState({ busqueda: cadena })}
+            value={this.state.busqueda}
 
-                this.setState({
-                    todosUsers: usersDeDb
-                })
-            }
-        )
-    }
+            
+        />
 
-    searchUsers(searchText){
-        this.state.todosUsers.forEach( unUsuario => {
-            for (let i = 0; i < this.state.todosUsers.length; i++) {
-                if (searchText.length==0){
-                    
-                    this.setState({
-                        usersFiltrados: []
-                    })
-                    
-                }
-          
-                    if(this.state.usersFiltrados.includes(unUsuario))
-                    {null}
-                    else{this.state.usersFiltrados.push(unUsuario)}
-                
-            }
-          
-          }
-        )
-        
-      }
+        <FlatList
+          data={usuariosEncontrados}
+          keyExtractor={(user) => user.id}
+          style={styles.container}
+          renderItem={({ item }) => (
+            
+            <TouchableOpacity 
 
-    actualizarInput(){
-        //que me muestre el usuario que estoy clickeando
-        if (this.render.userId != "") {
-
-            <Profile props = {this.id}></Profile>
-        }
-    }
-
-    render(){
-        return(
-            <ScrollView>
-
-            <Text style={styles.screenTitle}>Search Results</Text>
-                <View style={styles.searchContainer}>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={(text)=> (this.searchUsers(text), this.setState({searchText: text}))}
-                        placeholder='Search user'
-                        keyboardType='default'
-                        value={this.state.searchText}>
-                    </TextInput>
-                </View>
-
-                {
-                    this.state.usersFiltrados.length === 0 
-                    ?
-                    <Text> Esperando busqueda...</Text>
-                    :
-                   
-                    <FlatList 
-                        data= {this.state.usersFiltrados}
-                        keyExtractor={ unUsuario => unUsuario.id }
-                        renderItem={ ({item}) => <TouchableOpacity onPress={()=> this.props.navigation.navigate("Profile")}><Text>{item.datos.owner}</Text></TouchableOpacity> }
-                    />
-                    
-                }
-
-            </ScrollView>
-        )
-    }
+                onPress={() => this.props.navigation.navigate('Profile')}
+                style={styles.containerProfile}>
+            {item.datos.foto != "" ?
+                <Image 
+                        style={styles.foto} 
+                        source={{uri:item.datos.foto}}
+                        resizeMode='contain'/> :
+                        <Image 
+                            style={styles.foto} 
+                            source={{uri:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'}}
+                            resizeMode='contain'
+                        />}
+              <View>
+              <Text >{item.datos.usuario}</Text>
+              <Text style={styles.email}>{item.datos.owner}</Text>
+              
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+    );
+  }
 }
 
-const styles = new StyleSheet.create({
+const styles = StyleSheet.create({
     formContainer: {
         paddingHorizontal: 10,
         marginTop: 20,
@@ -127,6 +111,6 @@ const styles = new StyleSheet.create({
       textButton: {
         color: "#fff",
       },
-})
+});
 
 export default Search;
