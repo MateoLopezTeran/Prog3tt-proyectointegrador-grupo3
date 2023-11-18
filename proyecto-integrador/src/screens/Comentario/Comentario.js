@@ -1,6 +1,6 @@
 import react, { Component } from 'react';
 import {View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity} from 'react-native';
-import { db } from '../../firebase/config';
+import { db , auth} from '../../firebase/config';
 import PostComentario from '../../components/PostComentario';
 import firebase from 'firebase';
 
@@ -20,6 +20,7 @@ class Comentario extends Component {
                 comentarios.forEach( unComentario => {
                     if (unComentario.id == this.props.route.params.id.id) {
                         comentariosAMostrar.push({
+                            creador: auth.currentUser.email,
                             id: unComentario.id,
                             datos: unComentario.data()
                         })
@@ -34,7 +35,7 @@ class Comentario extends Component {
 
     Comentario(){
         db.collection("posts").doc(this.props.route.params.id.id).update({
-            comments: firebase.firestore.FieldValue.arrayUnion(this.state.comments)
+            comments: firebase.firestore.FieldValue.arrayUnion(this.state.comments).reverse()
         })
         .then(
             this.setState({
