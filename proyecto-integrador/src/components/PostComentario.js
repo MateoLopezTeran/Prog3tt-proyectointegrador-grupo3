@@ -26,7 +26,7 @@ class PostComentario extends Component {
                 <Text>Aún no hay comentarios</Text>
                 :
                 <FlatList
-                    data= {this.props.infoPostComentario.datos.comments}
+                    data= {this.props.infoPostComentario.datos.comments.reverse()}
                     keyExtractor={ id => id.toString() }
                     renderItem={ ({item}) => <Text style={styles.ContCom}>{item.autor} <br/> {item.texto}</Text> }
                 /> }

@@ -21,6 +21,7 @@ class Comentario extends Component {
                 comentarios.forEach( unComentario => {
                     if (unComentario.id == this.props.route.params.id.id) {
                         comentariosAMostrar.push({
+                            creador: auth.currentUser.email,
                             id: unComentario.id,
                             datos: unComentario.data()
                         })
