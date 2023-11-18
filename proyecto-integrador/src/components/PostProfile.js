@@ -4,63 +4,56 @@ import { auth, db } from '../firebase/config';
 import firebase from 'firebase';
 import { AntDesign } from '@expo/vector-icons'; 
 
-class Post extends Component {
+class PostProfile extends Component {
     constructor(props){
         super(props)
         this.state={
-            like: false,
-            numeroLikes: this.props.infoPost.datos.likes.length,
+            img: '',
             description: '',
-            comments: ''
+            date: '',
+            email: '',
+            likes: '',
+            comments: '',
+            autorComments: ''
         }
     }
     
     componentDidMount(){
-        if (this.props.infoPost.datos.likes.includes(auth.currentUser.email)) {
+        let likes = this.props.infoPost.data.likes
+
+        if(likes.length === 0){
             this.setState({
-                like: true
+                like: false
             })
         }
-    }
 
-    crearPost(){
-        db.collection('posts').add({
-            owner: auth.currentUser.email,
-            description: this.state.description,
-            likes: [],
-            comments: [],
-            autorComments: [],
-            img: '',
-            createdAt: Date.now(),
-        })
-        .then()
-        .catch(err => console.log(e))
+        if (likes.length >0) {
+            likes.forEach(like => {{if (like === auth.currentUser.email) {
+                this.setState({ like: true })
+            }}});
+        }
     }
 
     likear(){
         db.collection("posts").doc(this.props.infoPost.id).update({
             likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
-        .then(res => {
+        .then(
             this.setState({
-                like: true,
-                numeroLikes: this.props.infoPost.datos.likes.length,
+                like: true
             })
-        })
-        .catch(err => console.log(err))
+        )
     }
 
     desLikear(){
         db.collection("posts").doc(this.props.infoPost.id).update({
             likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
         })
-        .then(res => {
+        .then(
             this.setState({
-                like: false,
-                numeroLikes: this.props.infoPost.datos.likes.length,
+                like: false
             })
-        })
-        .catch(err => console.log(err))
+        )
     }
 
     Comentario(){
@@ -73,28 +66,36 @@ class Post extends Component {
             })
         )
     }
+    
+    borrarPost(){
+        db.collection('posts').doc(this.props.infoPost.id).delete()
+        .then(res=> {
+            console.log('Post borrado exitosamente');
+        })
+        .catch(err => console.log(err))
+    }
 
     render(){
         console.log(this.props);
         return (
-            <View style = {styles.formContainer}>
+            <View style = {styles.formContainer}>               
                 <TouchableOpacity onPress={() => this.props.navigation.navigate("Profile")}>
-                    <Text style = {styles.textButton}>{this.props.infoPost.datos.owner}</Text>
+                    <Text style = {styles.textButton}>{this.props.infoPost.data.owner}</Text>
                 </TouchableOpacity>
-                <Text style = {styles.textButton}>Descripción: {this.props.infoPost.datos.post}</Text>
-                <Image style={styles.image} source={this.props.infoPost.datos.foto} resizeMode='center'/>
+                <Text style = {styles.textButton}>Descripción: {this.props.infoPost.data.post}</Text>
+                <Image style={styles.image} source={this.props.infoPost.data.foto} resizeMode='center'/>
             
-                {this.state.like 
+                {this.props.infoPost.data.likes.length === 0 
                 ?
-                <TouchableOpacity onPress={() => this.desLikear()}>
-                    <Text style = {styles.textButton}>Likes: <AntDesign name="dislike2" size={24} color="black"/> {this.state.numeroLikes}</Text>
+                <TouchableOpacity onPress={() => this.likear()}>
+                    <Text style = {styles.textButton}>Likes: <AntDesign name="like2" size={24} color="black" /> {this.props.infoPost.data.likes.length}</Text>
                 </TouchableOpacity>
                 :
-                <TouchableOpacity onPress={() => this.likear()}>
-                    <Text style = {styles.textButton}>Likes: <AntDesign name="like2" size={24} color="black"/> {this.state.numeroLikes}</Text>
+                <TouchableOpacity onPress={() => this.desLikear()}>
+                    <Text style = {styles.textButton}>Likes: <AntDesign name="dislike2" size={24} color="black" /> {this.props.infoPost.data.likes.length}</Text>
                 </TouchableOpacity>}
                 
-                <TouchableOpacity style={styles.buttonCommentariosTotales} onPress={() => this.props.navigation.navigate("Comentario", {id: this.props.infoPost})}>
+                <TouchableOpacity style={styles.buttonComentariosTotales} onPress={() => this.props.navigation.navigate("Comentario", {id: this.props.infoPost})}>
                     <Text style = {styles.textButton}>Cantidad total de comentarios</Text>
                 </TouchableOpacity>
                 <View style={styles.seccionComments}>
@@ -111,6 +112,13 @@ class Post extends Component {
                         </TouchableOpacity>
                     }
                 </View>
+                {auth.currentUser.email == this.props.infoPost.data.owner 
+                ? 
+                <TouchableOpacity style={styles.button} onPress={() => this.borrarPost()}>
+                    <Text>Borrar Post</Text>
+                </TouchableOpacity>
+                :
+                null}
             </View>
         )
     }
@@ -126,16 +134,6 @@ const styles = StyleSheet.create({
       borderRadius: 5,
 
     },
-    input: {
-      height: 20,
-      paddingVertical: 15,
-      paddingHorizontal: 10,
-      borderWidth: 1,
-      borderColor: "#ccc",
-      borderStyle: "solid",
-      borderRadius: 6,
-      marginVertical: 10,
-    },
     inputComments: {
         height: 20,
         paddingVertical: 15,
@@ -146,17 +144,17 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         marginVertical: 10,
         width: 225,
-      },
+    },
     button: {
-      backgroundColor: "white",
-      paddingHorizontal: 10,
-      paddingVertical: 6,
-      textAlign: "center",
-      borderRadius: 4,
-      borderWidth: 1,
-      borderStyle: "solid",
-      borderColor: "black",
-      width: 100,
+        backgroundColor: "white",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "black",
+        width: 100,
     },
     buttonComments: {
         backgroundColor: "white",
@@ -172,7 +170,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         marginTop: 10
     },
-    buttonCommentariosTotales: {
+    buttonComentariosTotales: {
         backgroundColor: "grey",
         paddingHorizontal: 10,
         paddingVertical: 6,
@@ -198,4 +196,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Post;
+export default PostProfile;

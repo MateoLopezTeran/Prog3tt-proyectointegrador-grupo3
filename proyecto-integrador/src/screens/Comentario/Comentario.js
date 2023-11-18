@@ -1,6 +1,6 @@
 import react, { Component } from 'react';
 import {View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity} from 'react-native';
-import { db } from '../../firebase/config';
+import { db, auth } from '../../firebase/config';
 import PostComentario from '../../components/PostComentario';
 import firebase from 'firebase';
 
@@ -9,7 +9,8 @@ class Comentario extends Component {
         super(props)
         this.state={
             listaComments:[],
-            comments: ''
+            comments: '',
+            owner: ''
         }
     }
 
@@ -34,7 +35,7 @@ class Comentario extends Component {
 
     Comentario(){
         db.collection("posts").doc(this.props.route.params.id.id).update({
-            comments: firebase.firestore.FieldValue.arrayUnion(this.state.comments)
+            comments: firebase.firestore.FieldValue.arrayUnion({autor: auth.currentUser.email, texto: this.state.comments, createdAt: Date.now()})
         })
         .then(
             this.setState({
@@ -88,16 +89,6 @@ const styles = StyleSheet.create({
       borderRadius: 5,
 
     },
-    input: {
-      height: 20,
-      paddingVertical: 15,
-      paddingHorizontal: 10,
-      borderWidth: 1,
-      borderColor: "#ccc",
-      borderStyle: "solid",
-      borderRadius: 6,
-      marginVertical: 10,
-    },
     inputComments: {
         height: 20,
         paddingVertical: 15,
@@ -148,7 +139,7 @@ const styles = StyleSheet.create({
     seccionComments: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
     },
     textButton: {
       color: "black",

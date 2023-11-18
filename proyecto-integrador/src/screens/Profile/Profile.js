@@ -1,7 +1,7 @@
 import { Component } from "react";
-import {TouchableOpacity, View, Text, FlatList, StyleSheet } from "react-native";
+import {TouchableOpacity, View, Text, FlatList, StyleSheet, Image } from "react-native";
 import { auth, db } from "../../firebase/config";
-import Post from "../../components/Post";
+import PostProfile from "../../components/PostProfile";
 
 class Profile extends Component {
   constructor() {
@@ -51,56 +51,52 @@ class Profile extends Component {
 
   render() {
     console.log(this.state.profile);
-    console.log(this.state.profile);
     return (
       <View>
-      <br/>
-      <View style={styles.orden}>
-      <View style={styles.foto}>
-      <Text>Foto de Perfil: </Text>
-      { this.state.profile.length > 0 
-        ? 
-        <Text>{this.state.profile[0].data.foto}</Text>
-
-        : 
-        false}
-      </View>
-      <View style={styles.seccionProfile}>
-
-        <Text style = {styles.texto}>Usuario: {auth.currentUser.email}</Text>
-        { this.state.profile.length > 0 
-        ? 
-        <Text style = {styles.texto}>Nombre de Usuario: {this.state.profile[0].data.usuario}</Text>
-        : 
-        false}
-        { this.state.profile.length > 0           ? 
-        <Text style = {styles.texto}>Biografia: {this.state.profile[0].data.minibio}</Text>
-        : 
-        false}
-      </View>
-      </View>
-
-
         <br/>
+        <View style={styles.orden}>
+          <View style={styles.foto}>
+            <Text>Foto de Perfil: </Text>
+            { this.state.profile.length > 0 
+            ? 
+            <Image style={styles.foto} source={this.state.profile[0].data.foto} resizeMode="contain"/>
+            : 
+            false}
+          </View>
+
+          <View style={styles.seccionProfile}>        
+            { this.state.profile.length > 0 
+            ? 
+            <Text style = {styles.texto}>Nombre de Usuario: {this.state.profile[0].data.usuario}</Text>
+            : 
+            false}
+
+            <Text style = {styles.texto}>Email: {auth.currentUser.email}</Text>
+
+            { this.state.profile.length > 0           ? 
+            <Text style = {styles.texto}>Biografia: {this.state.profile[0].data.minibio}</Text>
+            : 
+            false}
+          </View>
+        </View>
+
         <View style = {styles.seccionDos}>
-        <Text style = {styles.texto}>Mis posteos:</Text>
-        {/* {this.state.posteos === 0 
-        ?
-        <Text style = {styles.texto}>Cargando...</Text>
-        :
-        <FlatList 
+          <Text style = {styles.texto}>Mis posteos:</Text>
+          {this.state.posteos === 0 
+          ?
+          <Text style = {styles.texto}>Cargando...</Text>
+          :
+          <FlatList 
             data= {this.state.posteos}
             keyExtractor={ unPost => unPost.id }
-            renderItem={ ({item}) => <Post infoPost = { item } /> }
-          />} */}
+            renderItem={ ({item}) => <PostProfile infoPost = { item } navigation = {this.props.navigation} /> }
+          />}
         </View>
 
         <br/>
         <TouchableOpacity style={styles.button} onPress={() => this.logout()}>
           <Text style = {styles.texto} >Logout</Text>
         </TouchableOpacity>
-          
-
       </View>
     );
   }
@@ -113,7 +109,7 @@ const styles = StyleSheet.create({
   },
   foto: {
     width: 170,
-    height: 200,
+    height: 100,
   },
   seccionProfile: {
     flex: 1,

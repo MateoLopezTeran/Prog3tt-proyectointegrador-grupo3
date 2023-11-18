@@ -17,6 +17,7 @@ class PostComentario extends Component {
     }
 
     render(){
+        console.log(this.props.infoPostComentario.datos);
         return(
             <View style={styles.contenedor}>
                 <View>
@@ -27,7 +28,7 @@ class PostComentario extends Component {
                 <FlatList
                     data= {this.props.infoPostComentario.datos.comments}
                     keyExtractor={ id => id.toString() }
-                    renderItem={ ({item}) => <Text style={styles.ContCom}>{item}</Text> }
+                    renderItem={ ({item}) => <Text style={styles.ContCom}>{item.autor} <br/> {item.texto}</Text> }
                 /> }
                 </View>
             </View>
