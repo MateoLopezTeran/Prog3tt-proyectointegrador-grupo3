@@ -36,23 +36,30 @@ class Search extends Component {
 
     searchUsers(searchText){
         this.state.todosUsers.forEach( unUsuario => {
-          if (searchText.length==0){
-              this.setState({
-                  usersFiltrados: []
-              })
+            for (let i = 0; i < this.state.todosUsers.length; i++) {
+                if (searchText.length==0){
+                    
+                    this.setState({
+                        usersFiltrados: []
+                    })
+                    
+                }
+          
+                    if(this.state.usersFiltrados.includes(unUsuario))
+                    {null}
+                    else{this.state.usersFiltrados.push(unUsuario)}
+                
+            }
+          
           }
-          if (unUsuario.datos.owner.includes(searchText) ) {
-              if(this.state.usersFiltrados.includes(unUsuario))
-              {null}
-              else{this.state.usersFiltrados.push(unUsuario)}
-          }
-        })
+        )
+        
       }
-  
 
     actualizarInput(){
         //que me muestre el usuario que estoy clickeando
         if (this.render.userId != "") {
+
             <Profile props = {this.id}></Profile>
         }
     }
@@ -63,13 +70,13 @@ class Search extends Component {
 
             <Text style={styles.screenTitle}>Search Results</Text>
                 <View style={styles.searchContainer}>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(text)=> (this.searchUsers(text), this.setState({searchText: text}))}
-                    placeholder='Search user'
-                    keyboardType='default'
-                    value={this.state.searchText}>
-                </TextInput>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={(text)=> (this.searchUsers(text), this.setState({searchText: text}))}
+                        placeholder='Search user'
+                        keyboardType='default'
+                        value={this.state.searchText}>
+                    </TextInput>
                 </View>
 
                 {
@@ -81,7 +88,7 @@ class Search extends Component {
                     <FlatList 
                         data= {this.state.usersFiltrados}
                         keyExtractor={ unUsuario => unUsuario.id }
-                        renderItem={ ({item}) => <Text>{item.datos.owner}</Text> }
+                        renderItem={ ({item}) => <TouchableOpacity onPress={()=> this.props.navigation.navigate("Profile")}><Text>{item.datos.owner}</Text></TouchableOpacity> }
                     />
                     
                 }
