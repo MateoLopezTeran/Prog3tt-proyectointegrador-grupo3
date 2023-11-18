@@ -6,6 +6,7 @@ import Register from './src/screens/Register/Register';
 import Login from './src/screens/Login/Login';
 import Menu from './src/components/Menu';
 import Comentario from './src/screens/Comentario/Comentario';
+import DistintoProfile from './src/screens/DistintoProfile/DistintoProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +35,12 @@ export default function App() {
         <Stack.Screen
           name="Comentario"
           component={Comentario}
+          options={{ headerShown: true }}
+        />
+
+        <Stack.Screen
+          name="DistintoProfile"
+          component={DistintoProfile}
           options={{ headerShown: true }}
         />
       </Stack.Navigator>

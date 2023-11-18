@@ -95,7 +95,7 @@ class Profile extends Component {
 
         <br/>
         <TouchableOpacity style={styles.button} onPress={() => this.logout()}>
-          <Text style = {styles.texto} >Logout</Text>
+          <Text style = {styles.texto}>Logout</Text>
         </TouchableOpacity>
       </View>
     );
