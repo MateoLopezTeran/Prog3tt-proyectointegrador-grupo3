@@ -77,7 +77,7 @@ class Register extends Component {
                 />
                 <TextInput
                 style={styles.input}
-                onChangeText={(link)=>this.setState({profilepic: link})}
+                onChangeText={(text)=>this.setState({profilepic: text})}
                 placeholder='profile pic'
                 keyboardType='default'
                 value={this.state.profilepic}

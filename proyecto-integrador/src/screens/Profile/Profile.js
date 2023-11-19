@@ -7,8 +7,8 @@ class Profile extends Component {
   constructor() {
     super();
     this.state = {
+      posteos: [],
       profile: [],
-      posteos: []
     };
   }
 
@@ -44,22 +44,33 @@ class Profile extends Component {
     )
   }
 
-  logout() {
+  logout(){
     auth.signOut();
     this.props.navigation.navigate("Login");
   }
 
+  eliminarPerfil(id){
+    auth.currentUser.delete()
+    .then(() => {
+      console.log('Usuario eliminado correctamente');
+    })
+    .then(() => {
+      db.collection('users').doc(id).delete()
+        this.props.navigation.navigate('Register')
+    })
+    .catch(error=>{console.log(error);})
+  }
+
   render() {
-    console.log(this.state.profile);
+    console.log(this.state);
     return (
       <View>
         <br/>
         <View style={styles.orden}>
-          <View style={styles.foto}>
-            <Text>Foto de Perfil: </Text>
+          <View style={styles.seccionFoto}>
             { this.state.profile.length > 0 
             ? 
-            <Image style={styles.foto} source={this.state.profile[0].data.foto} resizeMode="contain"/>
+            <Image style={styles.foto} source={this.state.profile[0].data.foto} resizeMode="center"/>
             : 
             false}
           </View>
@@ -68,6 +79,7 @@ class Profile extends Component {
             { this.state.profile.length > 0 
             ? 
             <Text style = {styles.texto}>Nombre de Usuario: {this.state.profile[0].data.usuario}</Text>
+            
             : 
             false}
 
@@ -94,9 +106,16 @@ class Profile extends Component {
         </View>
 
         <br/>
-        <TouchableOpacity style={styles.button} onPress={() => this.logout()}>
-          <Text style = {styles.texto}>Logout</Text>
-        </TouchableOpacity>
+        <View style = {styles.seccionBoton}>
+          <TouchableOpacity style= {styles.button} onPress={() => this.logout()}>
+            <Text style={styles.textoBoton}>Logout</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity style= {styles.button} onPress={() => this.eliminarPerfil(this.state.profile[0].id)}>
+            <Text style={styles.textoBoton}>Eliminar Perfil</Text>
+          </TouchableOpacity>
+          
+        </View>
       </View>
     );
   }
@@ -105,19 +124,28 @@ class Profile extends Component {
 const styles = StyleSheet.create({
   orden: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
+    marginTop: 15,
   },
   foto: {
-    width: 170,
-    height: 100,
+    height: 200,
+    marginBottom: 40,
+    marginTop: 15
   },
   seccionProfile: {
     flex: 1,
-    flexDirection: 'column',
-    paddingBottom: 100,
-    height: 200,
-    width: 200,
     justifyContent: "center",
+    backgroundColor: 'lightgrey',
+    borderRadius: 10,
+    marginHorizontal: 5
+  },
+  seccionFoto: {
+    flex: 1,
+    height: 200,
+    width: '100%',
+    justifyContent: "center",
+    marginTop: 30,
+    marginBottom: 55
   },
   seccionDos: {
     paddingTop: 5,
@@ -127,6 +155,12 @@ const styles = StyleSheet.create({
     justifyContent:"flex-start",
   },
   texto: {
+    textAlign: "left",
+    color: "black",
+    fontSize: 15,
+    marginLeft: 95
+  },
+  textoBoton: {
     textAlign: "left",
     color: "black",
     fontSize: 15,
@@ -142,8 +176,12 @@ const styles = StyleSheet.create({
     borderColor: "#28a745",
     margin: 5,
     width: 80,
+    height: 50
   },
-
+  seccionBoton: {
+    flex: 1,
+    flexDirection: 'row',
+  }
 });
 
 export default Profile;
