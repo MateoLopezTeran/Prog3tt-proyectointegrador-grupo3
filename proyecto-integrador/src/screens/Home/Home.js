@@ -30,7 +30,7 @@ class Home extends Component {
 
 
   render() {
-    console.log(this.state.listaPost);
+    
     return (
       <>
         <Text>Lista de Posteos</Text>

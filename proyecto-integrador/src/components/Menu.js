@@ -5,6 +5,8 @@ import Home from "../screens/Home/Home";
 import Search from "../screens/Search/Search";
 import Profile from "../screens/Profile/Profile";
 import PostForm from "../screens/PostForm/PostForm";
+import CambiarContra from "../screens/CambiarContra/CambiarContra";
+
 
 
 const Tab = createBottomTabNavigator()
@@ -23,6 +25,7 @@ class Menu extends Component {
             <Tab.Screen name="NewPost" component={PostForm}/>
             <Tab.Screen name="Search" component={Search}/>
             <Tab.Screen name="Profile" component={Profile}/>
+            <Tab.Screen name="CambiarContra" component={CambiarContra}/>
         </Tab.Navigator>
     );
   }

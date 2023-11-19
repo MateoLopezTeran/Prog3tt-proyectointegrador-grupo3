@@ -4,7 +4,7 @@ import {auth } from '../../firebase/config';
 import {View, TextInput, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import firebase from 'firebase';
 
-class CambiarContra extends Component{
+class CambiarContra extends Component {
         constructor(){
         super();
         this.state = {
@@ -12,7 +12,6 @@ class CambiarContra extends Component{
             msj: '',
             newPass: '',
             error: ''
-            
         }}
 
         cambio(newPass){
@@ -35,10 +34,7 @@ class CambiarContra extends Component{
                         error: "No pudimos cambiar tu contraseña"
                     })
                 }
-            
             })
-              
-        
         }
 
         render(){
@@ -70,7 +66,6 @@ class CambiarContra extends Component{
                 
             )
         }
-
 }
 export default CambiarContra;
 
