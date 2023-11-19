@@ -7,6 +7,7 @@ import Login from './src/screens/Login/Login';
 import Menu from './src/components/Menu';
 import Comentario from './src/screens/Comentario/Comentario';
 import DistintoProfile from './src/screens/DistintoProfile/DistintoProfile';
+import CambiarContra from './src/screens/CambiarContra/CambiarContra';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +44,13 @@ export default function App() {
           component={DistintoProfile}
           options={{ headerShown: true }}
         />
+
+        <Stack.Screen
+          name="CambiarContra"
+          component={CambiarContra}
+          options={{ headerShown: false }}
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
