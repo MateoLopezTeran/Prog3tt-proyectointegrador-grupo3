@@ -4,7 +4,7 @@ import {auth } from '../../firebase/config';
 import {View, TextInput, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import firebase from 'firebase';
 
-class CambiarContra extends Component {
+class CambiarContra extends Component{
         constructor(){
         super();
         this.state = {
@@ -12,6 +12,7 @@ class CambiarContra extends Component {
             msj: '',
             newPass: '',
             error: ''
+            
         }}
 
         cambio(newPass){
@@ -34,7 +35,10 @@ class CambiarContra extends Component {
                         error: "No pudimos cambiar tu contraseña"
                     })
                 }
+            
             })
+              
+        
         }
 
         render(){
@@ -66,6 +70,44 @@ class CambiarContra extends Component {
                 
             )
         }
-}
-export default CambiarContra;
 
+
+}
+
+const styles = StyleSheet.create({
+    formContainer:{
+        flex: 1,
+        paddingHorizontal:10,
+        marginTop: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    input:{
+        height:50,
+        paddingVertical:15,
+        paddingHorizontal: 10,
+        borderWidth:1,
+        borderColor: '#ccc',
+        borderStyle: 'solid',
+        borderRadius: 6,
+        marginVertical:10,
+        width: 350
+    },
+    button:{
+        backgroundColor:'#0099CC',
+        paddingHorizontal: 10,
+        paddingVertical: 7,
+        borderRadius:4, 
+        borderWidth:1,
+        borderStyle: 'solid',
+        borderColor: '#0099CC',
+        margin: 10,
+        width: 250,
+        alignItems: 'center',
+        height: 35
+    },
+    textButton:{
+        color: '#fff'
+    }})
+
+export default CambiarContra;
