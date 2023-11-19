@@ -2,11 +2,13 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import CambiarContra from './src/screens/CambiarContra/CambiarContra';
 import Register from './src/screens/Register/Register';
 import Login from './src/screens/Login/Login';
 import Menu from './src/components/Menu';
 import Comentario from './src/screens/Comentario/Comentario';
 import DistintoProfile from './src/screens/DistintoProfile/DistintoProfile';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +43,12 @@ export default function App() {
         <Stack.Screen
           name="DistintoProfile"
           component={DistintoProfile}
+          options={{ headerShown: true }}
+        />
+
+        <Stack.Screen
+          name="CambiarContra"
+          component={CambiarContra}
           options={{ headerShown: true }}
         />
       </Stack.Navigator>
