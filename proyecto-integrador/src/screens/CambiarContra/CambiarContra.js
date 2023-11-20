@@ -62,9 +62,8 @@ class CambiarContra extends Component{
                 <TouchableOpacity style={styles.button} onPress={()=>this.cambio(this.state.newPass)}>
                     <Text style={styles.textButton}>Cambiar la contraseña</Text>    
                 </TouchableOpacity>
-                <Text>{this.state.error}</Text>
                 <TouchableOpacity style = {styles.button}onPress={() => this.props.navigation.goBack()}>
-                    <Text style={styles.textButton}>Volver</Text>
+                    <Text style={styles.textButton} >Volver</Text>
                 </TouchableOpacity>
                 </View>
                 
@@ -76,38 +75,38 @@ class CambiarContra extends Component{
 
 const styles = StyleSheet.create({
     formContainer:{
-        flex: 1,
-        paddingHorizontal:10,
+        paddingHorizontal: 10,
         marginTop: 20,
-        alignItems: 'center',
+        maxWidth: 300,
         justifyContent: 'center',
     },
     input:{
-        height:50,
-        paddingVertical:15,
+        height: 20,
+        paddingVertical: 15,
         paddingHorizontal: 10,
-        borderWidth:1,
-        borderColor: '#ccc',
-        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: "#ccc",
+        borderStyle: "solid",
         borderRadius: 6,
-        marginVertical:10,
-        width: 350
+        marginVertical: 10,
+        textAlign: "center",
     },
     button:{
-        backgroundColor:'#0099CC',
+        backgroundColor: "blue",
         paddingHorizontal: 10,
-        paddingVertical: 7,
-        borderRadius:4, 
-        borderWidth:1,
-        borderStyle: 'solid',
-        borderColor: '#0099CC',
-        margin: 10,
-        width: 250,
-        alignItems: 'center',
-        height: 35
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "#28a745",
+        margin: 5,
     },
-    textButton:{
-        color: '#fff'
-    }})
+    
+    textButton: {
+        color: "#fff",
+        textAlign: "center",
+      },
+})
 
 export default CambiarContra;
