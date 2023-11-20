@@ -56,9 +56,9 @@ class Profile extends Component {
     })
     .then(() => {
       db.collection('users').doc(id).delete()
-        this.props.navigation.navigate('Register')
+        this.props.navigation.navigate('Login')
     })
-    .catch(error=>{console.log(error);})
+    .catch((error)=>{console.log(error);})
   }
 
   render() {
