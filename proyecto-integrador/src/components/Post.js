@@ -75,7 +75,7 @@ class Post extends Component {
     }
 
     render(){
-        console.log(this.state);
+        console.log(this.props);
         return (
             <View style = {styles.formContainer}>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('DistintoProfile', {datos: this.props.infoPost.datos.owner, navigation: this.props.navigation})}>
@@ -100,16 +100,12 @@ class Post extends Component {
                 
                 {this.props.infoPost.datos.comments.length > 0 
                 ?
-                <FlatList
-                    data={this.state.comments}
-                    keyExtractor={comment => comment.text + comment.user}
-                    initialNumToRender={4}
+                <FlatList    
+                    data={this.props.infoPost.datos.comments.slice(0,4)}
+                    keyExtractor={comment => comment.text}
                     renderItem={(comentario) => 
                     <View style={styles.seccionComments}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('DistintoProfile', { datos: comentario.item.autor, navigation: this.props.navigation})}>
-                            <Text style={styles.texto}>{comentario.item.autor}:</Text>
-                        </TouchableOpacity>
-                        <Text style={styles.texto}>{comentario.texto}</Text>
+                        <Text style={styles.texto}>{comentario.item.texto}</Text>
                     </View>}/>
                 : 
                 null}
