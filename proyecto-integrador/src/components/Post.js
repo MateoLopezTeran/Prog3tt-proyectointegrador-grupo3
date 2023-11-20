@@ -102,11 +102,11 @@ class Post extends Component {
                 ?
                 <FlatList
                     data={this.state.comments}
-                    keyExtractor={key}
+                    keyExtractor={comment => comment.text + comment.user}
                     initialNumToRender={4}
                     renderItem={(comentario) => 
                     <View style={styles.seccionComments}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('DistintoProfile', { userData: comentario.item.useremail, navigation: this.props.navigation})}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('DistintoProfile', { datos: comentario.item.autor, navigation: this.props.navigation})}>
                             <Text style={styles.texto}>{comentario.item.autor}:</Text>
                         </TouchableOpacity>
                         <Text style={styles.texto}>{comentario.texto}</Text>
