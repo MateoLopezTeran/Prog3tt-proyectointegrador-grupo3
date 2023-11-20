@@ -75,7 +75,7 @@ class Post extends Component {
     }
 
     render(){
-        console.log(this.props);
+        console.log(this.state);
         return (
             <View style = {styles.formContainer}>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('DistintoProfile', {datos: this.props.infoPost.datos.owner, navigation: this.props.navigation})}>
@@ -93,10 +93,27 @@ class Post extends Component {
                 <TouchableOpacity onPress={() => this.likear()}>
                     <Text style = {styles.textButton}>Likes: <AntDesign name="like2" size={24} color="black"/> {this.state.numeroLikes}</Text>
                 </TouchableOpacity>}
-                
+
                 <TouchableOpacity style={styles.buttonCommentariosTotales} onPress={() => this.props.navigation.navigate("Comentario", {id: this.props.infoPost})}>
                     <Text style = {styles.textButton}>Cantidad total de comentarios</Text>
                 </TouchableOpacity>
+                
+                {this.props.infoPost.datos.comments.length > 0 
+                ?
+                <FlatList
+                    data={this.state.comments}
+                    keyExtractor={key}
+                    initialNumToRender={4}
+                    renderItem={(comentario) => 
+                    <View style={styles.seccionComments}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('DistintoProfile', { userData: comentario.item.useremail, navigation: this.props.navigation})}>
+                            <Text style={styles.texto}>{comentario.item.autor}:</Text>
+                        </TouchableOpacity>
+                        <Text style={styles.texto}>{comentario.texto}</Text>
+                    </View>}/>
+                : 
+                null}
+
                 <View style={styles.seccionComments}>
                     <TextInput
                     style={styles.inputComments}
@@ -105,6 +122,7 @@ class Post extends Component {
                     keyboardType="default"
                     value={this.state.comments}
                     />
+
                     {this.state.comments === '' ? null : 
                         <TouchableOpacity style={styles.buttonComments} onPress={() => this.Comentario()}>
                             <Text style={styles.textButton}>Comentar</Text>
@@ -188,6 +206,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start'
     },
+    texto: {
+        textAlign: "left",
+        color: "black",
+        fontSize: 15,
+      },
     textButton: {
       color: "black",
       fontSize: 15,

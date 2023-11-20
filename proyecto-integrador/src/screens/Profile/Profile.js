@@ -52,11 +52,11 @@ class Profile extends Component {
   eliminarPerfil(id){
     auth.currentUser.delete()
     .then(() => {
-      console.log('Usuario eliminado correctamente');
-    })
-    .then(() => {
       db.collection('users').doc(id).delete()
         this.props.navigation.navigate('Login')
+    })
+    .then(() => {
+      console.log('Usuario eliminado correctamente');
     })
     .catch((error)=>{console.log(error);})
   }
